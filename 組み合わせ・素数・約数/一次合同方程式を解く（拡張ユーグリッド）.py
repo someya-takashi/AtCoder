@@ -41,6 +41,7 @@ a //= gcd
 b //= gcd
 n //= gcd
 
+# aのmod nでの逆元
 ainv = modinv(a, n)
 
 # x ≡ ainv*b (mod n)  

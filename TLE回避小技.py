@@ -3,6 +3,7 @@
 # 高速入力
 # min, maxよりif文を使う
 # ダイクストラ、heapでタプル使ったら早くなった
+# メモ化再帰のlru_cache
 
 
 print("高速入力")
@@ -33,3 +34,10 @@ print("ダイクストラ、heapでタプル使ったら早くなった")
 
 # tuple : 1022 ms https://atcoder.jp/contests/past202104-open/submissions/me
 # list : 2059 ms https://atcoder.jp/contests/past202104-open/submissions/24232601
+
+
+print("メモ化再帰のlcu_cache")
+# memo配列で結果をメモ化するより、lcu_cacheで関数の引数の結果をキャッシュするほうが早いかも
+# 例：memo配列（TLE）：https://atcoder.jp/contests/abc195/submissions/24743427
+# 例：lcu_cache（AC）：https://atcoder.jp/contests/abc195/submissions/24743471
+# 上記ではmemo配列を使うとTLEになった（WAもあったので、単にmemo配列でのメモ化でミスしている可能性もある）

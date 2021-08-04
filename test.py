@@ -1,25 +1,35 @@
-N = int(input())
+N, M = map(int, input().split())
+A = list(map(int, input().split()))
 
-mod = 10**9+7
+import math
+from functools import reduce
 
-class RepeatedPermutation():
-  fct, inv = [], []
-  mod = 10**9+7
-  def __init__(self, imx, imod) -> None:
-    self.mod = imod
-    self.fct, self.inv = [1] * (imx+2), [1]* (imx+2)
-    for i in range(2, imx+1): self.fct[i] = self.fct[i-1] * i % imod
-    self.inv[imx] = pow(self.fct[imx], imod-2, imod)
-    for i in range(imx, 0,-1): self.inv[i-1] = self.inv[i] * i % imod
-  def pwr(self, n1, n2):
-    return self.fct[n1+n2] * self.inv[n1] % self.mod  *self.inv[n2] % self.mod
+# 2つの最小公倍数
+def my_lcm_base(x, y):
+    if x > M or y > M:
+        print(0)
+        exit()
+    return (x * y) // math.gcd(x, y)
 
-p = RepeatedPermutation(N, mod)
+# リストで渡された要素の最小公倍数
+def my_lcm(*numbers):
+    return reduce(my_lcm_base, numbers, 1)
 
-ans = 0
-ans += p.pwr(1,1)
-ans += p.pwr(1,2)
-ans += p.pwr(2,1)
-ans += p.pwr(2,2)
+A = [a//2 for a in A]
+lcm = my_lcm(*A)
 
-print(ans)
+check = 0
+for i in range(N):
+    num = 0
+    temp = A[i]
+    while temp % 2 == 0:
+        temp //= 2
+        num += 1
+    if i == 0:
+        check = num
+    else:
+        if check != num:
+            print(0)
+            exit()
+
+print((M//lcm+1)//2)
