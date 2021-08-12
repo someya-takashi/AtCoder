@@ -1,35 +1,25 @@
-N, M = map(int, input().split())
-A = list(map(int, input().split()))
+# 約数系包除原理
+# 1からNまでの整数でgcd(x, y) = K となる(x, y)の組み合わせを求める
+N = int(input())
+K = int(input())
 
-import math
-from functools import reduce
+# 1-index
+# F[g] = 1からN以下のx, yでgcd(x, y) = g となる(x, y)の組み合わせの数
+F = [0] * (N+1)
 
-# 2つの最小公倍数
-def my_lcm_base(x, y):
-    if x > M or y > M:
-        print(0)
-        exit()
-    return (x * y) // math.gcd(x, y)
+# Nまでにgの倍数がいくつあるか（x, yそれぞれについて(N//g)通りなので二乗）
+for g in range(1, N+1):
+    F[g] = (N//g)**2
 
-# リストで渡された要素の最小公倍数
-def my_lcm(*numbers):
-    return reduce(my_lcm_base, numbers, 1)
+# gのk倍の重複を包除原理で取り除く
+# 例えばg=2のとき(x, y) = (4, 8) = gcd = 4なども数え上げているので, F[2]からF[4], F[6]など倍数成分を減算
+for g in range(1, N+1)[::-1]:
+    fg = F[g]
+    k = 2*g
+    while k <= N:
+        fg -= F[k]
+        k += g
+    
+    F[g] = fg
 
-A = [a//2 for a in A]
-lcm = my_lcm(*A)
-
-check = 0
-for i in range(N):
-    num = 0
-    temp = A[i]
-    while temp % 2 == 0:
-        temp //= 2
-        num += 1
-    if i == 0:
-        check = num
-    else:
-        if check != num:
-            print(0)
-            exit()
-
-print((M//lcm+1)//2)
+print(F[K])

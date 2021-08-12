@@ -86,8 +86,11 @@ for _ in range(N-1):
 
 In = [0] * N
 Out = [0] * N
+# Depth : 木の高さをInとOut時に記憶（区間処理用）
+# セグ木に渡してmin(In[a], In[b])からmax(Out[a], Out[b])区間の範囲minを取るとLCAのDepthがわかる
 Depth = []
-Di = [0] * N
+# Depth_index : 木の高さ（インデックスで直接参照用）
+Depth_index = [0] * N
 idx = 0
 # オイラーツアー
 def dfs(now, d = 0, parent=-1):
@@ -96,7 +99,7 @@ def dfs(now, d = 0, parent=-1):
     In[now] = idx
     idx += 1
     Depth.append(d)
-    Di[now] = d
+    Depth_index[now] = d
 
     for c in graph[now]:
         if c != parent:
@@ -121,4 +124,4 @@ for q in range(Q):
     l = min(In[a], In[b])
     r = max(Out[a], Out[b])
     lca = sg.query(l, r+1)
-    print(Di[a]+Di[b]-2*lca)
+    print(Depth_index[a]+Depth_index[b]-2*lca)
