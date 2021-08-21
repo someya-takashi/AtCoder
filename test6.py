@@ -1,41 +1,34 @@
-H, W, K = map(int, input().split())
-grid = [input() for _ in range(H)]
+N = int(input())
+A = list(map(int, input().split()))
 
-ALL = 1<<(H-1)
+acc = [0]
+for i in range(N):
+    acc.append(acc[i]+A[i])
 
-lines = [[0] for _ in range(H)]
-
-for i in range(H):
-    for j in range(W):
-        if grid[i][j] == "0":
-            w = 1
-        else:
-            w = 0
-        lines[i].append(lines[i][j]+w)
+import bisect
 
 ans = 10**10
-for i in range(ALL):
-    cuth = [0]
-    for j in range(H-1):
-        if i & 1<<j:
-            cuth.append(j)
-    cutw  = []
-    last = 0
-    for k in range(W):
-        for l in range(len(cuth)-1):
-            up = cuth[l]
-            down = cuth[l+1]
-            w = 0
-            for m in range(up, down):
-                w += lines[m][k]
-            
-            if w > K:
-                break
+for b in range(1, N-1):
+    S = acc[b+1]
 
+    a = bisect.bisect_left(acc, S/2)
+    Sp = acc[a]
+    Sq = S - Sp
 
-            
+    SS = acc[-1] - S
 
+    c = bisect.bisect_left(acc, S+SS/2)
+    Sr = acc[c] - S
+    Ss = SS-Sr
+
+    ans_min = min(Sp, Sq, Sr, Ss)
+    ans_max = max(Sp, Sq, Sr, Ss)
+
+    ans = min(ans, ans_max-ans_min)
+
+print(ans)
 
 
 
+    
 

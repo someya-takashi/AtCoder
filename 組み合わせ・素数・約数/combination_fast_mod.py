@@ -1,15 +1,15 @@
 #https://linus-mk.hatenablog.com/entry/2020/02/23/225258
 #　フェルマーの小定理を用いたcombination計算の高速化
 # n = 10**9, k = 10**5でも間に合う
-# mod 素数 と組み合わせて使う（フェルマーの小定理を用いているため）
-
+# 階乗テーブルを作っていないのでNが大きいときにも都度計算可能
+# 一回当たりの計算量がO(k)なので、Σkが大きくなると時間がかかる
 
 n = int(input())
 
 k = int(input())
 mod = 10**9 + 7
 
-#計算したいkについてbinomial_coefficients関数を呼び出す前に前処理？をしておく
+#計算したいkについて階乗の逆元を前処理をしておく
 modinv_table = [-1] * (k+1)
 modinv_table[1] = 1
 for i in range(2, k+1):

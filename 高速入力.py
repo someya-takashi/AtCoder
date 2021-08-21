@@ -3,3 +3,10 @@
 
 import sys
 input = sys.stdin.readline
+
+
+# メモ化再帰
+from functools import lru_cache
+@lru_cache(maxsize=None)
+def dfs():
+    return
