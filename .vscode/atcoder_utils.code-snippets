@@ -63,6 +63,14 @@
 		"description": "mod"
 		},
 
+		"mod2": {
+			"prefix": "mod2",
+			"body": [
+				"mod = 998244353",
+		],
+		"description": "mod"
+		},
+
 		"gridinput": {
 			"prefix": "gridinput",
 			"body": [

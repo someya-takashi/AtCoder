@@ -10,3 +10,8 @@ dp = [[[-10**10] * 4 for _ in range(W)] for _ in range(H)]
 dp = [[[-10**10] * W for _ in range(H)] for _ in range(4)]
 
 # 小さい変数は一番外側に書かないと何故か遅い
+
+"""
+dp[i][j][k]の代わりにdp = defaultdict(lambda: -10**18)として
+キーにタプルで(i, j, k)のように状態管理することも可能 
+"""

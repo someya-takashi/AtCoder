@@ -1,30 +1,25 @@
-N = int(input())
+N, M, K = map(int, input().split())
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
 
-l = -10**18
-r = 10**18
-s = 0
+SA = [0]
+SB = [0]
+for i in range(N):
+    SA.append(SA[i]+A[i])
 
-for _ in range(N):
-    a, t = map(int, input().split())
-    if t == 1:
-        s += a
-        l += a
-        r += a
-    elif t == 2:
-        l = max(a, l)
-        r = max(a, r)
-    else:
-        l = min(a, l)
-        r = min(a, r)
+for i in range(M):
+    SB.append(SB[i]+B[i])
 
-Q = int(input())
-X = list(map(int, input().split()))
-for i in range(Q):
-    if X[i] + s <= l:
-        print(l)
-    elif X[i] + s >= r:
-        print(r)
-    else:
-        print(X[i] + s)
+import bisect
 
-    
+ans = 0
+for i in range(N+1):
+    now = SA[i]
+
+    rest = K - now
+    if rest > 0:
+        j = bisect.bisect_right(SB, rest)
+        total = i + j - 1
+        ans = max(ans, total)
+
+print(ans)
