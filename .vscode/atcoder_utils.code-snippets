@@ -86,4 +86,12 @@
 		],
 		"description": "for graph input"
 		},
+
+		"binary_search": {
+			"prefix": "binary_search",
+			"body": [
+				"ok = 0\nng = 0\nwhile abs(ok-ng) > 1:\n    mid = (ok+ng)//2\n    if f(mid):\n        ok = mid\n    else:\n        ng = mid\nprint(ok)",
+		],
+		"description": "binary_search"
+		},
 }

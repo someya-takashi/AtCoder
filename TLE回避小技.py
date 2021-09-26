@@ -35,6 +35,14 @@ print("ダイクストラ、heapでタプル使ったら早くなった")
 # tuple : 1022 ms https://atcoder.jp/contests/past202104-open/submissions/me
 # list : 2059 ms https://atcoder.jp/contests/past202104-open/submissions/24232601
 
+print("ダイクストラ、定数倍の高速化")
+# if d_now + d_nxt < dist[nxt]:
+#   dist[nxt] = d_now + d_nxt
+#   heapq.heappush(Q, (d_now+d_nxt, nxt))
+
+# 頂点N<=1000, 辺の数 O(N**2)の完全グラフ等、辺の数が多いときはvisited[i]でショートカットする
+# 距離1のbfsでvisitedで管理するときもfor内でqueに追加する際にフラグを立てると、
+# 余分なqueからの取り出しをショートカットでき、密なグラフの探索を高速化できる
 
 print("メモ化再帰のlcu_cache")
 # memo配列で結果をメモ化するより、lcu_cacheで関数の引数の結果をキャッシュするほうが早いかも

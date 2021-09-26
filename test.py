@@ -1,10 +1,8 @@
-A, B = map(int, input().split())
+def Base_n_to_10(X,n):
+    out = 0
+    for i in range(1,len(str(X))+1):
+        out += int(X[-i])*(n**(i-1))
+    return out
 
-for i in range(100000):
-    a = (i * 0.08)//1
-    b = (i * 0.1)//1
-    if a == A and b == B:
-        print(i)
-        exit()
-
-print(-1)
+# 例 : 6進数を10進数へ変換
+print(Base_n_to_10("3532", 6))

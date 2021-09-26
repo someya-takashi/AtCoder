@@ -12,7 +12,6 @@ mod = 10**9+7
 
 class Ncrs():
   fct, inv = [], []
-  mod = 10**9+7
   def __init__(self, imx, imod) -> None:
     self.mod = imod
     # 階乗および階乗の逆元
